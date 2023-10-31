@@ -49,7 +49,6 @@ export class AuthService {
         } catch (err) {
             console.log("AppWrite Service::logout :: error", err)
 
-
         }
 
 
