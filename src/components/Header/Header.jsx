@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Logo, Logout, LogoutBtn } from "../";
+import { Container, Logo, LogoutBtn } from "../";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -17,32 +17,33 @@ function Header() {
     <header className="py-3 shadow bg-gray-500">
       <Container>
         <nav>
-          <div className="flex">
+          <div className="flex items-center">
             <div className="mr-4">
               <Link to="/">
                 <Logo width="70px" />
               </Link>
             </div>
-          </div>
-          <ul className="flex ml-auto">
-            {navItems.map((item) =>
-              item.active ? (
-                <li key={item.slug}>
-                  <button
-                    onClick={() => navigate(item.slug)}
-                    className="inline-block px-4 py-2 duration-200 hover:bg-blue-100 rounded-full"
-                  >
-                    {item.name}
-                  </button>
+
+            <ul className="flex ml-auto">
+              {navItems.map((item) =>
+                item.active ? (
+                  <li key={item.slug}>
+                    <button
+                      onClick={() => navigate(item.slug)}
+                      className="inline-block px-4 py-2 duration-200 hover:bg-blue-100 rounded-full"
+                    >
+                      {item.name}
+                    </button>
+                  </li>
+                ) : null
+              )}
+              {authStatus && (
+                <li>
+                  <LogoutBtn />
                 </li>
-              ) : null
-            )}
-            {authStatus && (
-              <li>
-                <LogoutBtn />
-              </li>
-            )}
-          </ul>
+              )}
+            </ul>
+          </div>
         </nav>
       </Container>
     </header>

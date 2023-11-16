@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, PostCard } from "postcss";
+import { Container, PostCard } from "../components";
 import appwriteService from "../appwrite/config.service";
 
 function AllPosts() {
@@ -11,16 +11,22 @@ function AllPosts() {
       }
     });
   }, []);
+
   return (
     <div className="w-full py-8">
       <Container>
-        <div className="flex flex-wrap">
+        <div className="flex flex-wrap w-full">
           {posts.map((post) => (
-            <div key={post.$id} className="p-2 w-1">
-              <PostCard post={post} />
+            <div key={post.$id} className="p-2 w-1/2">
+              <PostCard
+                featuredImage={post?.featuredImage}
+                $id={post.$id}
+                title={post.title}
+                content={post.content}
+              />
             </div>
           ))}
-          <div className="w-full h-full"></div>{" "}
+          <div className="w-full h-full"></div>
           {/* to fill the remaining space */}
         </div>
       </Container>

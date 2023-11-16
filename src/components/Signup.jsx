@@ -50,27 +50,33 @@ function Signup() {
         </p>
         {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
         <form onSubmit={handleSubmit(create)}>
-          <div className ="space-y-5">
-            <Input label = "Full Name: "
-            placeholder = "Enter your full name"
-            {...register("name",{require:true})}
+          <div className="space-y-5">
+            <Input
+              label="Full Name: "
+              placeholder="Enter your full name"
+              {...register("name", { require: true })}
             />
             <Input
               label="Email: "
               placeholder="Enter your email"
               type="email"
-              {...register("email"),{require:true,validate:{
-                matchPattern:(value)=> /^([\w\.\-_]+)?\w+@[\w-_]+(\.\w+){1,}$/.test(value) || "Email address must be a valid address"
-              }}}
+              {...register("email", {
+                required: true,
+                validate: {
+                  matchPattern: (value) =>
+                    /^([\w\.\-_]+)?\w+@[\w-_]+(\.\w+){1,}$/.test(value) ||
+                    "Email address must be a valid address",
+                },
+              })}
             />
 
             <Input
-            label = "Password: "
-            type = "password"
-            placeholder = "Enter your password"
-            {...register("password",{require:true,minLength:6})}
+              label="Password: "
+              type="password"
+              placeholder="Enter your password"
+              {...register("password", { require: true, minLength: 6 })}
             />
-
+            <Button type="submit" className="w-full"> Create Account </Button>
           </div>
         </form>
       </div>

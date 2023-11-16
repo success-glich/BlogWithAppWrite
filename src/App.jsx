@@ -4,6 +4,7 @@ import authService from "./appwrite/auth.service";
 import { login, logout } from "./store/authSlice";
 import { Footer, Header } from "./components";
 import { Outlet } from "react-router-dom";
+import config from "./config/config";
 function App() {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
@@ -13,24 +14,25 @@ function App() {
       .getCurrentUser()
       .then((user) => {
         if (user) {
+          console.log("user");
           dispatch(login({ userData: user }));
         } else {
           dispatch(logout());
         }
       })
-      .finally(() => setLoading(false));
+      .catch((err) => console.log("App.js Error", err))
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
-  // return (
 
-  //   <>
-  //     <h1> A blog with app write</h1>
-  //   </>
-  // );
   return !loading ? (
     <div className="min-h-screen flex flex-wrap content-between bg-gray-400">
       <div className="w-full block">
         <Header />
-        <main>{/* <Outlet /> */}</main>
+        <main className="">
+          <Outlet />
+        </main>
         <Footer />
       </div>
     </div>

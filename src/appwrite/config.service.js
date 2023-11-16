@@ -1,5 +1,5 @@
 import config from "../config/config"
-import { Client, ID, Databases, Query } from "appwrite";
+import { Client, ID, Databases, Query, Storage } from "appwrite";
 
 export class Service {
     client = new Client();
@@ -13,6 +13,7 @@ export class Service {
     }
 
     async createPost({ title, slug, content, featuredImage, status, userId }) {
+        console.log({ title, content: content ? content : "non content here" })
         try {
 
             return await this.databases.createDocument(config.appwriteDatabaseId, config.appwriteCollectionId, slug, {
@@ -99,6 +100,7 @@ export class Service {
         }
     }
     getFilePreview(fileId) {
+        console.log(fileId);
         return this.bucket.getFilePreview(config.appwriteBucketId, fileId);
     }
 

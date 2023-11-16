@@ -1,14 +1,15 @@
 import React, { useId } from "react";
 
 // function Select React.forwardRef({ options, label, className = "", ...props }, ref) {
-//   const id = useId();
 //   return <div>Select</div>;
 // };
 
 const Select = React.forwardRef(
   ({ options = [], label, className = "", ...props }, ref) => {
+    const id = useId();
+
     return (
-      <did className="w-full">
+      <div className="w-full">
         {label && (
           <label htmlFor={id} className="">
             {label}
@@ -26,7 +27,7 @@ const Select = React.forwardRef(
             </option>
           ))}
         </select>
-      </did>
+      </div>
     );
   }
 );
