@@ -12,7 +12,10 @@ function Post() {
   const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userData);
-  const isAuthor = post && userData ? post.usedId === userData.userId : false;
+  // const isAuthor = post && userData ? post.usedId === userData.$id : false;
+  const isAuthor = post?.userId === userData?.$id;
+
+  console.log(userData.$id === post.userId);
   const deletePost = () => {
     service.deletePost(post.$id).then((status) => {
       if (status) {
@@ -58,7 +61,7 @@ function Post() {
       </div>
       <div className="p-4 flex flex-col justify-center-center ml-28">
         <h2 className="font-bold text-2xl">{post.title}</h2>
-        {parse(post.content)}
+        {post.content && parse(post?.content)}
         <p></p>
       </div>
     </div>
